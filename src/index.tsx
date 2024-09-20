@@ -1,6 +1,7 @@
 import * as esbuild from 'esbuild-wasm';
 import { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom/client';
+import { unpkgPathPlugin } from './plugins/unpkgPathPlugin';
 
 const el = document.getElementById("root");
 const root = ReactDOM.createRoot(el!);
@@ -27,12 +28,20 @@ const App = () => {
             return;
         }
 
-        const result = await ref.current.transform(input, {
-            loader: 'jsx',
-            target: 'es2015',
-        });
+        const result = await ref.current.build({
+            entryPoints: ['index.js'],
+            bundle: true,
+            write: false,
+            plugins: [unpkgPathPlugin()],
+            define: {
+                'process.env.env.NODE_ENV': '"production"',
+                global: 'window'
+            }
+        })
 
-        setCode(result.code);
+        //console.log(result);
+
+        setCode(result.outputFiles[0].text);
     
     };
 
