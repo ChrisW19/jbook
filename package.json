@@ -13,6 +13,7 @@
     "axios": "^1.7.7",
     "classnames": "^2.5.1",
     "esbuild-wasm": "0.8.27",
+    "localforage": "^1.10.0",
     "nth-check": "^2.0.1",
     "postcss": "^8.4.31",
     "react": "^18.3.1",
