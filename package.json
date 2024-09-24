@@ -3,19 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@monaco-editor/react": "3.7.5",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.108",
+    "@types/prettier": "^2.7.3",
     "@types/react": "^18.3.7",
     "@types/react-dom": "^18.3.0",
     "axios": "^1.7.7",
+    "bulmaswatch": "^0.8.1",
     "classnames": "^2.5.1",
     "esbuild-wasm": "0.8.27",
+    "jscodeshift": "0.11.0",
     "localforage": "^1.10.0",
+    "monaco-editor": "0.52.0",
     "nth-check": "^2.0.1",
     "postcss": "^8.4.31",
+    "prettier": "^2.8.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.3.0",
@@ -49,6 +55,10 @@
     ]
   },
   "devDependencies": {
+    "assert": "^2.1.0",
+    "constants-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
+    "react-app-rewired": "^2.2.1",
     "tailwindcss": "^3.4.12"
   }
 }
