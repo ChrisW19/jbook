@@ -4,6 +4,7 @@ import prettier from 'prettier';
 import parser from 'prettier/parser-babel';
 import './code-editor.css';
 
+
 interface CodeEditorProps {
     initialValue: string;
     onChange(value: string): void;
