@@ -12,7 +12,7 @@ export const updateCell = (id: string, content: string): UpdateCellAction => {
     }
 };
 
-export const deletCell = (id: string): DeleteCellAction => {
+export const deleteCell = (id: string): DeleteCellAction => {
     return{
         type:ActionType.DELETE_CELL,
         payload: {
@@ -23,14 +23,14 @@ export const deletCell = (id: string): DeleteCellAction => {
 };
 
 export const moveCell = (id: string, direction: Direction): MoveCellAction => {
-    return{
-        type:ActionType.MOVE_CELL,
-        payload: {
-            id,
-            direction
-        }
-    }
-};
+    return {
+      type: ActionType.MOVE_CELL,
+      payload: {
+        id,
+        direction,
+      },
+    };
+  };
 
 export const insertCell = (id:string, cellType: CellTypes): InsertCellAction => {
     return{
