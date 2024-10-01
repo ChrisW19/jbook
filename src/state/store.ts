@@ -11,13 +11,33 @@ export const store = createStore(
 );
 
 store.dispatch({
-  type: ActionType.INSERT_CELL,
+  type:ActionType.INSERT_CELL,
   payload: {
     id: null,
     type: 'code'
   }
-});
+})
 
-const id = store.getState().cells.order[0];
+store.dispatch({
+  type:ActionType.INSERT_CELL,
+  payload: {
+    id: null,
+    type: 'text'
+  }
+})
 
-console.log(id);
+store.dispatch({
+  type:ActionType.INSERT_CELL,
+  payload: {
+    id: null,
+    type: 'code'
+  }
+})
+
+store.dispatch({
+  type:ActionType.INSERT_CELL,
+  payload: {
+    id: null,
+    type: 'text'
+  }
+})
