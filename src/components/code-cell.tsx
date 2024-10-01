@@ -1,50 +1,41 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect} from 'react';
 import CodeEditor from './code-editor';
 import Preview from './preview';
 import bundle from '../bundler';
 import Resizable from './resizable';
+import { Cell } from '../state';
+import { useActions } from '../hooks/use-actions';
 
-const CodeCell = () => {
+interface CodeCellProps {
+  cell: Cell
+}
+
+const CodeCell: React.FC<CodeCellProps> = ({cell}) => {
   const [code, setCode] = useState('');
-  const [input, setInput] = useState('');
   const [error, setError] = useState('');
-  const timerRef = useRef<number | null>(null);
 
-  const handleBundling = useCallback(async (input: string) => {
-      const output = await bundle(input);
-      setCode(output.code);
-      setError(output.err); // Reset error on success
-  }, []);
+  const {updateCell} = useActions();
 
   useEffect(() => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-    }
-    
-    timerRef.current = window.setTimeout(() => {
-      handleBundling(input);
-    }, 1000);
+    const timer = setTimeout(async () => {
+      const output = await bundle(cell.content);
+      setCode(output.code);
+      setError(output.err)
+    }, 750);
 
     return () => {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-      }
-    };
-  }, [input, handleBundling]);
+      clearTimeout(timer);
+    }
 
-
-  // Memoize the onChange function to avoid unnecessary re-renders
-  const handleEditorChange = useCallback((value: string) => {
-    setInput(value);
-  }, []);
+  }, [cell.content]);
 
   return (
     <Resizable direction="vertical">
       <div style={{ height: '100%', display: 'flex', flexDirection: 'row' }}>
         <Resizable direction="horizontal">
           <CodeEditor
-            initialValue="const a = 1;"
-            onChange={handleEditorChange}
+            initialValue={cell.content}
+            onChange={(value) => updateCell(cell.id, value)}
           />
         </Resizable>
 
