@@ -14,17 +14,17 @@ const ActionBar: React.FC<ActionBarProps> = ({ id }) => {
             <Button
                 className="is-primary"
                 onClick={() => moveCell(id, 'up')}
-                icon="fas fa-arrow-up"
+                icon="fa-arrow-up"
             />
             <Button
                 className="is-primary"
                 onClick={() => moveCell(id, 'down')}
-                icon="fas fa-arrow-down"
+                icon="fa-arrow-down"
             />
             <Button
                 className="is-danger"
                 onClick={() => deleteCell(id)}
-                icon="fas fa-times"
+                icon="fa-times"
             />
         </div>
     );
