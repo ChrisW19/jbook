@@ -1,16 +1,17 @@
 import React from 'react';
 import { useActions } from "../hooks/use-actions";
-import Button from './reuseable-btn';
+import Button from './reuseable-ActionBarBtn';
+import "./action-barBtns.css";
 
 interface ActionBarProps {
     id: string;
 }
 
-const ActionBar: React.FC<ActionBarProps> = ({ id }) => {
+const ActionBarBtns: React.FC<ActionBarProps> = ({ id }) => {
     const { moveCell, deleteCell } = useActions();
 
     return (
-        <div>
+        <div className="action-bar">
             <Button
                 className="is-primary"
                 onClick={() => moveCell(id, 'up')}
@@ -30,4 +31,4 @@ const ActionBar: React.FC<ActionBarProps> = ({ id }) => {
     );
 };
 
-export default ActionBar;
+export default ActionBarBtns;

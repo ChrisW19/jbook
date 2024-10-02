@@ -13,7 +13,7 @@ const Button: React.FC<ButtonProps> = ({ onClick, className = '', icon }) => {
       onClick={onClick}
     >
       <span className="icon">
-        <i className={`fas ${icon}`}></i>
+        <i className={`fas ${icon}`} />
       </span>
     </button>
   );

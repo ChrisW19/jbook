@@ -31,32 +31,35 @@ const reducer = produce((state: CellsState = initialState, action: Action) => {
             state.order = state.order.filter(id => id !== deleteId);
             return state;
         case ActionType.MOVE_CELL:
-            const { direction } = action.payload;
-            const index = state.order.findIndex((id) => id === action.payload.id);
+            const { id: moveCellId, direction } = action.payload;
+            const index = state.order.findIndex((id) => id === moveCellId);
             const targetIndex = direction === 'up' ? index - 1 : index + 1;
         
             if (targetIndex < 0 || targetIndex > state.order.length - 1) {
-                return;
+                return state;
             }
         
-            state.order[index] = state.order[targetIndex];
-            state.order[targetIndex] = action.payload.id;
+            // Swap cells in order
+            [state.order[index], state.order[targetIndex]] = [state.order[targetIndex], state.order[index]];
             return state;
-        case ActionType.INSERT_CELL:
+        case ActionType.INSERT_CELL_AFTER:
+            const { id: targetCellId, type } = action.payload
             const cell: Cell = {
+                id: randomId(),
                 content: '',
-                type: action.payload.type,
-                id: randomId()
+                type,
             }
             
             state.data[cell.id] = cell;
 
-            const foundIndex = state.order.findIndex(id => id === action.payload.id);
+            //Find index of target cell
+            const foundIndex = state.order.findIndex(id => id === targetCellId);
 
+            //Insert new cell after the target or end if not found
             if (foundIndex < 0 ){
-                state.order.push(cell.id)
+                state.order.unshift(cell.id)
             } else {
-                state.order.splice(foundIndex, 0, cell.id);
+                state.order.splice(foundIndex + 1, 0, cell.id);
             };
 
             return state;
