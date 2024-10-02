@@ -1,6 +1,6 @@
 import './code-editor.css';
 import './syntax.css';
-import { useRef } from 'react';
+import { useRef, useCallback } from 'react';
 import MonacoEditor, { EditorDidMount } from '@monaco-editor/react';
 import prettier from 'prettier';
 import parser from 'prettier/parser-babel';
@@ -22,11 +22,13 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, initialValue }) => {
     monacoEditor.getModel()?.updateOptions({ tabSize: 2 });
   };
 
-  const onFormatClick = () => {
-    // get current value from editor
-    const unformatted = editorRef.current.getModel().getValue();
+  const onFormatClick = useCallback(() => {
+    if (!editorRef.current) return;
 
-    // format that value
+    // Get current value from editor
+    const unformatted = editorRef.current.getValue();
+
+    // Format the code using Prettier
     const formatted = prettier
       .format(unformatted, {
         parser: 'babel',
@@ -37,9 +39,9 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, initialValue }) => {
       })
       .replace(/\n$/, '');
 
-    // set the formatted value back in the editor
+    // Set the formatted value back in the editor
     editorRef.current.setValue(formatted);
-  };
+  }, []);
 
   return (
     <div className="editor-wrapper">

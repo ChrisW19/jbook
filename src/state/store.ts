@@ -10,34 +10,14 @@ export const store = createStore(
   applyMiddleware(thunk)
 );
 
-store.dispatch({
-  type:ActionType.INSERT_CELL,
-  payload: {
-    id: null,
-    type: 'code'
-  }
-})
+const insertCellAfter = (cellType:string) => {
+  store.dispatch({
+    type: ActionType.INSERT_CELL_AFTER,
+    payload: {
+      id: null,
+      type: cellType,
+    },
+  });
+};
 
-store.dispatch({
-  type:ActionType.INSERT_CELL,
-  payload: {
-    id: null,
-    type: 'text'
-  }
-})
-
-store.dispatch({
-  type:ActionType.INSERT_CELL,
-  payload: {
-    id: null,
-    type: 'code'
-  }
-})
-
-store.dispatch({
-  type:ActionType.INSERT_CELL,
-  payload: {
-    id: null,
-    type: 'text'
-  }
-})
+['code', 'text', 'code', 'text'].forEach(insertCellAfter);
