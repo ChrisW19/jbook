@@ -1,3 +1,9 @@
+.code-cell-container {
+    height: calc(100% - 10px);
+    display: flex;
+    flex-direction: row;
+}
+
 .progress-wrapper {
     height: 100%;
     flex-grow: 1;
