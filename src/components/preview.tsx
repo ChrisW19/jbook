@@ -54,7 +54,7 @@ const Preview: React.FC<PreviewProps> = ({ code, error }) => {
       <iframe
         title="preview"
         ref={iframe}
-        sandbox="allow-scripts allow-same-origin"
+        sandbox="allow-scripts "
         srcDoc={html}
         className="iframe-preview"
       />
